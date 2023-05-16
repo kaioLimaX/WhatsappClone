@@ -35,19 +35,30 @@ android {
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation platform('com.google.firebase:firebase-bom:31.3.0')
+
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    //bibliotecas Firebase
+    implementation platform('com.google.firebase:firebase-bom:31.3.0')
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-storage'
     implementation 'com.google.firebase:firebase-database'
     implementation 'com.firebaseui:firebase-ui-storage:7.2.0'
     implementation 'com.google.firebase:firebase-analytics'
+
+    //Biblioteca Abas
     implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
     implementation 'com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar'
+
+    //biblioteca CircleImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'androidx.navigation:navigation-ui:2.5.3'
+
+    //Biblioteca SearchView
+    implementation 'com.miguelcatalan:materialsearchview:1.4.0'
+
 
 
 

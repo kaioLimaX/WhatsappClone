@@ -109,6 +109,8 @@ public class ContatosFragments extends Fragment {
         usuariosRef.removeEventListener(valueEventListenerContatos);
     }
 
+
+
     public void recuperarContatos(){
         listacontatos.clear();
 

@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.skydevices.watsappclone.R;
 import com.skydevices.watsappclone.activity.ChatActivity;
+import com.skydevices.watsappclone.activity.MainActivity;
 import com.skydevices.watsappclone.adapter.ContatosAdapter;
 import com.skydevices.watsappclone.adapter.ConversasAdapter;
 import com.skydevices.watsappclone.config.ConfiguracaoFirebase;
@@ -104,6 +106,7 @@ public class ConversasFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        listaConversas.clear();
         recuperarConversas();
     }
 
@@ -113,15 +116,41 @@ public class ConversasFragment extends Fragment {
         conversasRef.removeEventListener(childEventListenerConversas);
     }
 
+    public void pesquisarConversa(String texto){
+        //Toast.makeText(getActivity(), texto , Toast.LENGTH_SHORT).show();
+
+        List<Conversa> listaBuscaConversas = new ArrayList<>();
+
+        for(Conversa conversa : listaConversas){
+            String nome = conversa.getUsuarioExibicao().getNome().toLowerCase();
+            String ultimaMsg = conversa.getUltimaMensagem().toLowerCase();
+
+            if(nome.contains(texto) || ultimaMsg.contains(texto)){
+                listaBuscaConversas.add( conversa );
+
+            }
+        }
+
+        adapter = new ConversasAdapter( listaBuscaConversas, getActivity());
+        recyclerViewConversas.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+
+    }
+
+    public  void recarregarConversas(){
+        adapter = new ConversasAdapter( listaConversas, getActivity());
+        recyclerViewConversas.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
     public void recuperarConversas(){
-
-
         childEventListenerConversas = conversasRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                listaConversas.clear();
+
                 Conversa conversa = snapshot.getValue(Conversa.class);
-                listaConversas.add( conversa);
+                listaConversas.add( conversa );
                 adapter.notifyDataSetChanged();
 
             }
@@ -130,7 +159,7 @@ public class ConversasFragment extends Fragment {
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 listaConversas.clear();
                 Conversa conversa = snapshot.getValue(Conversa.class);
-                listaConversas.add( conversa);
+                listaConversas.add( conversa );
                 adapter.notifyDataSetChanged();
 
 

@@ -3,9 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menuPesquisa"
+        android:title="@string/menu_configuracoes"
         android:icon="@drawable/ic_pesquisa_branco"
-        android:title="@string/menu_pesquisa"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
+
     <item
         android:id="@+id/menuConfiguracoes"
         android:title="@string/menu_configuracoes"
